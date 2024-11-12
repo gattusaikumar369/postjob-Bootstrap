@@ -175,7 +175,67 @@ checkbox.addEventListener("click", () => {
 });
 
 
+const countryCityData = {
+    "India": ["Mumbai", "Delhi", "Bangalore", "Hyderabad", "Chennai", "Kolkata", "Ahmedabad", "Pune"],
+    "United States": ["New York", "Los Angeles", "Chicago", "Houston", "Phoenix", "San Francisco", "Dallas", "Miami"],
+    "Canada": ["Toronto", "Vancouver", "Montreal", "Calgary", "Ottawa", "Edmonton", "Quebec City", "Winnipeg"],
+    "Australia": ["Sydney", "Melbourne", "Brisbane", "Perth", "Adelaide", "Gold Coast", "Canberra", "Hobart"],
+    "United Kingdom": ["London", "Manchester", "Birmingham", "Liverpool", "Leeds", "Edinburgh", "Glasgow", "Bristol"],
+    "Germany": ["Berlin", "Munich", "Hamburg", "Frankfurt", "Cologne", "Stuttgart", "Dusseldorf", "Dortmund"],
+    "France": ["Paris", "Marseille", "Lyon", "Toulouse", "Nice", "Nantes", "Montpellier", "Bordeaux"],
+    "Japan": ["Tokyo", "Osaka", "Kyoto", "Yokohama", "Sapporo", "Nagoya", "Fukuoka", "Kobe"],
+    "Brazil": ["Sao Paulo", "Rio de Janeiro", "Brasilia", "Salvador", "Fortaleza", "Belo Horizonte", "Manaus", "Curitiba"],
+    "China": ["Beijing", "Shanghai", "Hong Kong", "Shenzhen", "Guangzhou", "Chengdu", "Xi'an", "Hangzhou"],
+    "Italy": ["Rome", "Milan", "Naples", "Turin", "Florence", "Venice", "Bologna", "Palermo"],
+    "Russia": ["Moscow", "Saint Petersburg", "Novosibirsk", "Yekaterinburg", "Nizhny Novgorod", "Kazan", "Chelyabinsk", "Omsk"],
+    "Mexico": ["Mexico City", "Guadalajara", "Monterrey", "Cancun", "Puebla", "Tijuana", "Merida", "Acapulco"],
+    "South Korea": ["Seoul", "Busan", "Incheon", "Daegu", "Daejeon", "Gwangju", "Suwon", "Ulsan"],
+    "Spain": ["Madrid", "Barcelona", "Seville", "Valencia", "Bilbao", "Zaragoza", "Malaga", "Granada"],
+    "South Africa": ["Johannesburg", "Cape Town", "Durban", "Pretoria", "Port Elizabeth", "Bloemfontein", "East London", "Polokwane"],
+    "Egypt": ["Cairo", "Alexandria", "Giza", "Sharm El Sheikh", "Luxor", "Aswan", "Port Said", "Tanta"],
+    "Argentina": ["Buenos Aires", "Cordoba", "Rosario", "Mendoza", "La Plata", "San Miguel de Tucuman", "Mar del Plata", "Salta"],
+    "Saudi Arabia": ["Riyadh", "Jeddah", "Mecca", "Medina", "Dammam", "Khobar", "Al Khobar", "Abha"],
+    "Turkey": ["Istanbul", "Ankara", "Izmir", "Bursa", "Antalya", "Adana", "Konya", "Gaziantep"],
+    "Sweden": ["Stockholm", "Gothenburg", "Malmo", "Uppsala", "Vasteras", "Orebro", "Linkoping", "Helsingborg"],
+    "Netherlands": ["Amsterdam", "Rotterdam", "The Hague", "Utrecht", "Eindhoven", "Groningen", "Delft", "Leiden"],
+    "Norway": ["Oslo", "Bergen", "Stavanger", "Trondheim", "Drammen", "Sandnes", "Bodø", "Fredrikstad"],
+    "Belgium": ["Brussels", "Antwerp", "Ghent", "Charleroi", "Liège", "Bruges", "Leuven", "Namur"],
+    "Poland": ["Warsaw", "Krakow", "Wroclaw", "Gdansk", "Poznan", "Katowice", "Lodz", "Lublin"],
+    "Nigeria": ["Lagos", "Abuja", "Kano", "Port Harcourt", "Ibadan", "Benin City", "Maiduguri", "Zaria"],
+    "Thailand": ["Bangkok", "Chiang Mai", "Phuket", "Pattaya", "Ayutthaya", "Hua Hin", "Khon Kaen", "Chonburi"],
+    "Vietnam": ["Hanoi", "Ho Chi Minh City", "Da Nang", "Haiphong", "Can Tho", "Hue", "Nha Trang", "Vung Tau"],
+    "Malaysia": ["Kuala Lumpur", "George Town", "Ipoh", "Johor Bahru", "Shah Alam", "Kota Kinabalu", "Kuching", "Malacca"],
+    "Indonesia": ["Jakarta", "Surabaya", "Bandung", "Medan", "Makassar", "Yogyakarta", "Palembang", "Semarang"]
+}
 
+document.addEventListener("DOMContentLoaded", function() {
+    // Populate country dropdown on page load
+    const countryDropdown = document.getElementById('countryDropdown');
+    for (const country in countryCityData) {
+        let option = document.createElement('option');
+        option.value = country;
+        option.textContent = country;
+        countryDropdown.appendChild(option);
+    }
 
+    // Set up the onchange event for the country dropdown
+    countryDropdown.addEventListener('change', updateCities);
+});
+
+// Update city dropdown based on selected country
+function updateCities() {
+    const cityDropdown = document.getElementById('cityDropdown');
+    cityDropdown.innerHTML = '<option selected disabled>Choose City</option>';  // Reset city dropdown
+
+    const selectedCountry = document.getElementById('countryDropdown').value;
+    if (selectedCountry && countryCityData[selectedCountry]) {
+        countryCityData[selectedCountry].forEach(city => {
+            let option = document.createElement('option');
+            option.value = city;
+            option.textContent = city;
+            cityDropdown.appendChild(option);
+        });
+    }
+}
 
 

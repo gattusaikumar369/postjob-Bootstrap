@@ -134,25 +134,34 @@ function toggleEndDate() {
 
 
   const skillInput = document.getElementById("skills");
-  const skillCont = document.getElementById("skills-cnt");
-  
-  skillInput.addEventListener("keydown", (event) => {
-      if (event.key === "Enter") {
-          event.preventDefault();
-  
-          const skillValue = skillInput.value.trim();
-          if (skillValue) {
-              const skillItem = document.createElement("li");
-              skillItem.textContent = skillValue;
-              skillItem.classList.add("skill-holder-item");
-              skillCont.appendChild(skillItem);
-              skillInput.value = ""; // Clear input after adding
-  
-              console.log(`Skill added: ${skillValue}`); // Check if this logs
-          }
-      }
-  });
-  
+const skillCont = document.getElementById("skills-cnt");
+
+skillInput.addEventListener("keydown", (event) => {
+    if (event.key === "Enter") {
+        event.preventDefault();
+
+        const skillValue = skillInput.value.trim();
+        if (skillValue) {
+            const skillItem = document.createElement("li");
+            skillItem.textContent = skillValue;
+            skillItem.classList.add("skill-holder-item");
+            const closeButton = document.createElement("span");
+            closeButton.textContent = "X"; 
+            closeButton.classList.add("close-btn");
+
+           
+            skillItem.appendChild(closeButton);
+            skillCont.appendChild(skillItem);
+            skillInput.value = ""; 
+            closeButton.addEventListener("click", () => {
+                skillCont.removeChild(skillItem);
+                console.log(`Skill removed: ${skillValue}`); 
+            });
+
+            console.log(`Skill added: ${skillValue}`);
+        }
+    }
+});
  
 
  // Get the container and checkbox elements
